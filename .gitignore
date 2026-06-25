@@ -1,7 +1,0 @@
-.venv/
-.venv311/
-__pycache__/
-*.pyc
-.vscode/
-.streamlit/secrets.toml
-.DS_Store
