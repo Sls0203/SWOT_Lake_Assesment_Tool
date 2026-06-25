@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Site Verified Lakes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #06101d;
+      color: #f8fafc;
+    }
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 28px 20px 40px;
+    }
+    h1 {
+      margin: 0 0 8px 0;
+      font-size: 2rem;
+    }
+    .sub {
+      color: #93c5fd;
+      margin-bottom: 20px;
+    }
+    .toprow {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    a.back {
+      color: #93c5fd;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    a.back:hover {
+      text-decoration: underline;
+    }
+    .card {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(148,163,184,0.15);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 18px;
+    }
+    select {
+      width: 100%;
+      max-width: 420px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(148,163,184,0.2);
+      background: #1f2937;
+      color: #fff;
+      font-size: 1rem;
+    }
+    .imgbox {
+      margin-top: 18px;
+    }
+    .imgbox img {
+      width: 100%;
+      max-width: 1100px;
+      border-radius: 12px;
+      display: block;
+      background: #fff;
+    }
+    .lake-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 18px 0 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="toprow">
+      <div>
+        <h1>Site Verified Lakes</h1>
+        <div class="sub">Select one of the 5 site-verified lakes to view the uploaded comparison image.</div>
+      </div>
+      <div>
+        <a class="back" href="/" target="_self">← Back to Main Hydrocron Page</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <label for="lakeSelect"><strong>Select verified lake</strong></label><br /><br />
+      <select id="lakeSelect">
+        <option value="../site_verified_imgs/img_1.png">Veeranam</option>
+        <option value="../site_verified_imgs/img_2.png">Poondi</option>
+        <option value="../site_verified_imgs/img_3.png">Puzhal Lake</option>
+        <option value="../site_verified_imgs/img_4.png">Cholavaram Lake</option>
+        <option value="../site_verified_imgs/img_5.png">Chembarambakkam</option>
+      </select>
+
+      <div id="lakeTitle" class="lake-title">Veeranam</div>
+
+      <div class="imgbox">
+        <img id="lakeImage" src="../site_verified_imgs/img_1.png" alt="Site verified lake graph" />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const select = document.getElementById("lakeSelect");
+    const img = document.getElementById("lakeImage");
+    const title = document.getElementById("lakeTitle");
+
+    select.addEventListener("change", function () {
+      img.src = this.value;
+      title.textContent = this.options[this.selectedIndex].text;
+    });
+  </script>
+</body>
+</html>

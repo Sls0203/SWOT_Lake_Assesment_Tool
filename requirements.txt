@@ -1,0 +1,13 @@
+streamlit
+streamlit-folium
+folium
+pandas
+requests==2.31.0
+plotly==5.19.0
+geopandas==0.14.4
+fiona==1.9.6
+shapely==2.1.2
+pyproj==3.7.2
+pillow==10.4.0
+numpy
+openpyxl
