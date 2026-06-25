@@ -88,7 +88,7 @@ def inject_css() -> None:
 
 @st.cache_data
 def load_geojson(path: str) -> gpd.GeoDataFrame:
-    return gpd.read_file(path)
+    return gpd.read_file(path,engine="pyogrio")
 
 
 def extract_lake_id_from_popup(s: str | None) -> str | None:
