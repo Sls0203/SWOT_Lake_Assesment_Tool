@@ -28,58 +28,77 @@ def inject_css() -> None:
     st.markdown(
         """
         <style>
-            .stApp {
-                background: #06101d;
-                color: #f8fafc;
-            }
+        /* Main page spacing */
+        .block-container {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            max-width: 1400px;
+        }
 
-            [data-testid="stSidebar"] {
-                background: #101827;
-            }
+        /* Hide default Streamlit top gap slightly */
+        header[data-testid="stHeader"] {
+            background: transparent;
+        }
 
-            .block-container {
-                padding-top: 1.1rem !important;
-                padding-left: 1.2rem !important;
-                padding-right: 1.2rem !important;
-                max-width: 100% !important;
-            }
+        /* Sidebar */
+        section[data-testid="stSidebar"] {
+            background-color: #F4F8FB;
+            border-right: 1px solid #E1E8EF;
+        }
 
-            .app-sub {
-                color: #93c5fd;
-                margin: 0;
-                line-height: 1.35;
-            }
+        section[data-testid="stSidebar"] h1,
+        section[data-testid="stSidebar"] h2,
+        section[data-testid="stSidebar"] h3,
+        section[data-testid="stSidebar"] p,
+        section[data-testid="stSidebar"] label {
+            color: #1E1E1E !important;
+        }
 
-            .metric-card {
-                background: linear-gradient(90deg, #0f3d1e 0%, #104b2c 100%);
-                border: 1px solid rgba(34,197,94,0.25);
-                border-radius: 12px;
-                padding: 14px 16px;
-                margin-bottom: 14px;
-                color: #dcfce7;
-                font-weight: 600;
-            }
+        /* Main title */
+        .main-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #12355B;
+            margin-bottom: 0.2rem;
+        }
 
-            .helper-box {
-                background: rgba(15, 23, 42, 0.65);
-                border: 1px solid rgba(148,163,184,0.15);
-                border-radius: 12px;
-                padding: 12px 14px;
-                margin-bottom: 10px;
-            }
+        .main-subtitle {
+            font-size: 1rem;
+            color: #5C6B73;
+            margin-bottom: 1.5rem;
+        }
 
-            .top-btn-wrap {
-                display: flex;
-                justify-content: flex-end;
-                align-items: flex-start;
-                gap: 0.6rem;
-                padding-top: 0.25rem;
-                flex-wrap: wrap;
-            }
+        /* Card box */
+        .info-card {
+            background-color: #FFFFFF;
+            padding: 1rem 1.2rem;
+            border-radius: 14px;
+            border: 1px solid #E1E8EF;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            margin-bottom: 1rem;
+        }
 
-            div[data-testid="stHorizontalBlock"] {
-                gap: 1rem !important;
-            }
+        /* Buttons */
+        div.stButton > button {
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        div[data-testid="stLinkButton"] a {
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        /* Inputs */
+        input, textarea, select {
+            border-radius: 8px !important;
+        }
+
+        /* Reduce huge empty spaces */
+        .element-container {
+            margin-bottom: 0.6rem;
+        }
         </style>
         """,
         unsafe_allow_html=True,
@@ -229,20 +248,23 @@ def update_query_params(lake_id: str | None, start_date, end_date) -> None:
 def main() -> None:
     inject_css()
 
-    title_col, btn_col = st.columns([7, 3], gap="small")
+title_col, btn_col = st.columns([6, 2], gap="large")
 
-    with title_col:
-        st.markdown(
-            '<div class="app-sub">Lake selector → India map → Hydrocron fetch → locally computed volume time series</div>',
-            unsafe_allow_html=True,
-        )
+with title_col:
+    st.markdown(
+        """
+        <div class="main-title">SWOT Lakes Monitoring</div>
+        <div class="main-subtitle">
+        A satellite-based platform for lake volume estimation, change-ratio analysis, 
+        and site-verified lake assessment using SWOT observations.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
-    with btn_col:
-        st.markdown('<div class="top-btn-wrap">', unsafe_allow_html=True)
-        st.link_button("Change Ratio Analysis ↗", "/change-ratio-analysis", type="secondary")
-        st.link_button("Site Verified Lakes ↗", "/site-verified-lakes", type="secondary")
-        st.markdown("</div>", unsafe_allow_html=True)
-
+with btn_col:
+    st.link_button("Change Ratio Analysis ↗", "/change-ratio-analysis", type="secondary")
+    st.link_button("Site Verified Lakes ↗", "/site-verified-lakes", type="secondary")
     st.sidebar.title("India SWOT Lakes")
     st.sidebar.markdown("Choose lake by ID or click directly on the map.")
 
@@ -339,7 +361,7 @@ def main() -> None:
         st.session_state["selected_lake_id"] = selected_lake_id
 
     with colR:
-        st.subheader("📈 Volume Time Series Using SWOT data")
+        st.subheader("📈Relative Volume Time Series Using SWOT data")
 
         lake_id = st.session_state.get("selected_lake_id")
         if not lake_id:
