@@ -29,4 +29,5 @@ How to run:
 
 Notes:
 - Internet is required for Hydrocron API calls.
+- Python 3.11 is the best version that can be used for accessing this tool.
 - The 5 site-verified lake images are already bundled inside site_verified_imgs.
