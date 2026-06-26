@@ -28,63 +28,100 @@ def inject_css() -> None:
     st.markdown(
         """
         <style>
-            .stApp {
-                background: #06101d;
-                color: #f8fafc;
-            }
+        /* Main app background */
+        .stApp {
+            background-color: #07111F;
+            color: #FFFFFF;
+        }
 
-            [data-testid="stSidebar"] {
-                background: #101827;
-            }
+        /* Main content width and spacing */
+        .block-container {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            max-width: 1500px;
+        }
 
-            .block-container {
-                padding-top: 1.1rem !important;
-                padding-left: 1.2rem !important;
-                padding-right: 1.2rem !important;
-                max-width: 100% !important;
-            }
+        /* Sidebar background */
+        section[data-testid="stSidebar"] {
+            background-color: #101B2D;
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+        }
 
-            .app-sub {
-                color: #93c5fd;
-                margin: 0;
-                line-height: 1.35;
-            }
+        /* Make sidebar text white */
+        section[data-testid="stSidebar"] h1,
+        section[data-testid="stSidebar"] h2,
+        section[data-testid="stSidebar"] h3,
+        section[data-testid="stSidebar"] p,
+        section[data-testid="stSidebar"] label,
+        section[data-testid="stSidebar"] span,
+        section[data-testid="stSidebar"] div {
+            color: #FFFFFF !important;
+        }
 
-            .metric-card {
-                background: linear-gradient(90deg, #0f3d1e 0%, #104b2c 100%);
-                border: 1px solid rgba(34,197,94,0.25);
-                border-radius: 12px;
-                padding: 14px 16px;
-                margin-bottom: 14px;
-                color: #dcfce7;
-                font-weight: 600;
-            }
+        /* Keep input boxes readable */
+        section[data-testid="stSidebar"] input,
+        section[data-testid="stSidebar"] textarea {
+            background-color: #FFFFFF !important;
+            color: #111827 !important;
+            border-radius: 8px !important;
+        }
 
-            .helper-box {
-                background: rgba(15, 23, 42, 0.65);
-                border: 1px solid rgba(148,163,184,0.15);
-                border-radius: 12px;
-                padding: 12px 14px;
-                margin-bottom: 10px;
-            }
+        /* Selectbox text */
+        section[data-testid="stSidebar"] div[data-baseweb="select"] * {
+            color: #111827 !important;
+        }
 
-            .top-btn-wrap {
-                display: flex;
-                justify-content: flex-end;
-                align-items: flex-start;
-                gap: 0.6rem;
-                padding-top: 0.25rem;
-                flex-wrap: wrap;
-            }
+        /* Main page headings and text */
+        h1, h2, h3, h4, h5, h6,
+        div[data-testid="stMarkdownContainer"] p,
+        div[data-testid="stMarkdownContainer"] span,
+        div[data-testid="stMarkdownContainer"] li {
+            color: #FFFFFF !important;
+        }
 
-            div[data-testid="stHorizontalBlock"] {
-                gap: 1rem !important;
-            }
+        /* Custom title */
+        .main-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #FFFFFF !important;
+            margin-bottom: 0.25rem;
+        }
+
+        .main-subtitle {
+            font-size: 1rem;
+            color: #D1D5DB !important;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        /* Subtext like "Showing 100 lake points..." */
+        .stCaption, small {
+            color: #D1D5DB !important;
+        }
+
+        /* Info/warning boxes */
+        div[data-testid="stAlert"] {
+            background-color: #101B2D;
+            color: #FFFFFF;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+        }
+
+        /* Buttons */
+        div[data-testid="stLinkButton"] a,
+        div.stButton > button {
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        /* Hide/soften Streamlit header background */
+        header[data-testid="stHeader"] {
+            background: transparent;
+        }
         </style>
         """,
         unsafe_allow_html=True,
     )
-
 
 @st.cache_data
 def load_geojson(path: str) -> gpd.GeoDataFrame:
